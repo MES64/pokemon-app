@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 
 import PokemonInfo from './components/PokemonInfo';
 import PokemonFilter from './components/PokemonFilter';
-import PokemonTable from './components/PokemonTable'
+import PokemonTable from './components/PokemonTable';
+import PokemonContext from './PokemonContext';
 
 const Title = styled.h1`
   text-align: center;
@@ -31,16 +32,27 @@ function App() {
   }, [])
 
   return (
-    <Container>
-      <Title>Pokemon Search</Title>
-      <TwoColumnLayout>
-        <div>
-          <PokemonFilter filter={filter} filterSet={filterSet} />
-          <PokemonTable pokemon={pokemon} filter={filter} selectedItemSet={selectedItemSet} />
-        </div>
-        {selectedItem && <PokemonInfo {...selectedItem} />}
-      </TwoColumnLayout>
-    </Container>
+    <PokemonContext.Provider
+      value={{
+        filter,
+        pokemon,
+        selectedItem,
+        filterSet,
+        pokemonSet,
+        selectedItemSet,
+      }}
+    >
+      <Container>
+        <Title>Pokemon Search</Title>
+        <TwoColumnLayout>
+          <div>
+            <PokemonFilter />
+            <PokemonTable />
+          </div>
+          <PokemonInfo />
+        </TwoColumnLayout>
+      </Container>
+    </PokemonContext.Provider>
   );
 }
 
