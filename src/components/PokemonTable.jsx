@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from "@emotion/styled";
+import { useSelector, useDispatch } from 'react-redux';
 
 import PokemonRow from './PokemonRow';
-import PokemonContext from '../PokemonContext';
 
 const Th = styled.th`
   text-align: left;
@@ -11,10 +11,9 @@ const Th = styled.th`
 `;
 
 const PokemonTable = () => {
-    const { 
-        state: { pokemon, filter },
-        dispatch,
-    } = useContext(PokemonContext);
+    const dispatch = useDispatch();
+    const pokemon = useSelector(state => state.pokemon);
+    const filter = useSelector(state => state.filter);
 
     return (
         <table width="100%">
@@ -44,7 +43,7 @@ const PokemonTable = () => {
     );
 };
 
-PokemonTable.propTypes = {
+/* PokemonTable.propTypes = {
     pokemon: PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.shape({
@@ -53,6 +52,6 @@ PokemonTable.propTypes = {
     }),
     filter: PropTypes.string.isRequired,
     selectedItemSet: PropTypes.func.isRequired,
-};
+}; */
 
 export default PokemonTable;

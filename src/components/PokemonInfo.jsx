@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-import PokemonContext from '../PokemonContext';
+import { useSelector } from 'react-redux';
 
 const PokemonInfo = () => {
-    const { state: { selectedItem } } = useContext(PokemonContext);
+    const selectedItem = useSelector(state => state.selectedItem);
 
     return selectedItem ? (
         <div>
@@ -23,7 +22,7 @@ const PokemonInfo = () => {
     ) : null;
 };
 
-PokemonInfo.propTypes = {
+/* PokemonInfo.propTypes = {
     selectedItem: PropTypes.shape({
         name: PropTypes.shape({
             english: PropTypes.string.isRequired,
@@ -37,6 +36,6 @@ PokemonInfo.propTypes = {
             "Speed": PropTypes.number.isRequired,
         }),
     }),
-};
+}; */
 
 export default PokemonInfo;
