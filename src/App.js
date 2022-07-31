@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "@emotion/styled";
+import { observer } from 'mobx-react';
 
+import store from './store';
 import PokemonInfo from './components/PokemonInfo';
 import PokemonFilter from './components/PokemonFilter';
 import PokemonTable from './components/PokemonTable';
@@ -20,11 +22,9 @@ const Container = styled.div`
 `;
 
 function App() {
-  /*if (pokemon.length === 0) {
-    return <div>Loading Data...</div>;
-  }*/
-
-  return (
+  return store.pokemon.length === 0 ? 
+  <div>Loading Data...</div> : 
+  (
     <Container>
       <Title>Pokemon Search</Title>
       <TwoColumnLayout>
@@ -38,4 +38,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
